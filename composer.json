@@ -1,0 +1,23 @@
+{
+    "name": "voipgrid/client",
+    "description": "A library to consume the VoIPGRID APIs.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Devhouse Spindle",
+            "email": "opensource@wearespindle.com"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^6.3"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.1"
+    },
+    "autoload": {
+        "psr-0": {
+            "VoIPGRID": "src/"
+        }
+    }
+}
