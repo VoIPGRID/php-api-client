@@ -10,27 +10,16 @@ namespace VoIPGRID;
 class User
 {
     private $user;
-    private $password;
     private $token;
 
     /**
      * User constructor.
      * @param string $user The username
-     * @param string $password The password
+     * @param string $token The password
      */
-    public function __construct(string $user, string $password)
+    public function __construct(string $user, string $token)
     {
         $this->user = $user;
-        $this->password = $password;
-        $this->token = null;
-    }
-
-    /**
-     * Sets the 2FA token
-     *
-     * @param string $token The 2FA token
-     */
-    public function setToken(string $token) {
         $this->token = $token;
     }
 
@@ -41,13 +30,8 @@ class User
      */
     public function login()
     {
-        if ($this->token !== null) {
-            $userPass = $this->user . ':' . $this->token;
-            return "Token $userPass";
-        } else {
-            $userPass = base64_encode($this->user . ':' . $this->password);
-            return "Basic $userPass";
-        }
+        $userPass = $this->user . ':' . $this->token;
+        return "Token $userPass";
     }
 
     /**
@@ -59,9 +43,9 @@ class User
     }
 
     /**
-     * @return string the password of this user.
+     * @return string the API token of this user.
      */
-    public function getPassword(): string {
-        return $this->password;
+    public function getToken(): string {
+        return $this->token;
     }
 }

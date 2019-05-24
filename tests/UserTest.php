@@ -12,9 +12,9 @@ class UserTest extends TestCase
      */
     public function testUserClass()
     {
-        $user = new User('jdoe@example.com', 'password123');
+        $user = new User('jdoe@example.com', 'some-random-token');
 
         $this->assertSame('jdoe@example.com', $user->getUserName());
-        $this->assertSame('password123', $user->getPassword());
+        $this->assertSame('some-random-token', $user->getToken());
     }
 }
