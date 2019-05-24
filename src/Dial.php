@@ -12,7 +12,7 @@ use GuzzleHttp\Exception\ClientException;
  * The Click to dial interface.
  * @package VoIPGRID
  */
-class ClickToDial
+class Dial
 {
     private $user;
     private $endPoint;
@@ -20,7 +20,7 @@ class ClickToDial
     private $status;
 
     /**
-     * ClickToDial constructor.
+     * Dial constructor.
      * @param \VoIPGRID\User $user
      * @param \GuzzleHttp\ClientInterface|NULL $client
      */
@@ -37,13 +37,13 @@ class ClickToDial
     }
 
     /**
-     * @param \VoIPGRID\ClickToDialConfig $config The config object
+     * @param \VoIPGRID\DialConfig $config The config object
      * @return bool
      *
      * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \VoIPGRID\Exception\ClickToDialException
+     * @throws \VoIPGRID\Exception\DialException
      */
-    public function call(ClickToDialConfig $config): bool
+    public function call(DialConfig $config): bool
     {
         $platformURL = getenv('PLATFORM_URL');
 
@@ -61,8 +61,8 @@ class ClickToDial
             return false;
         }
 
-        $this->status = new ClickToDialStatus(json_decode($result->getBody(), true));
-
+        $this->status = new DialStatus(json_decode($result->getBody(), true));
+        print_r($this->status);
         return true;
     }
 
@@ -70,16 +70,16 @@ class ClickToDial
      * @param string $number The number to call
      * @return bool
      * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \VoIPGRID\Exception\ClickToDialException
+     * @throws \VoIPGRID\Exception\DialException
      */
     public function callNumber(string $number)
     {
-        $config = new ClickToDialConfig(['b_number' => $number]);
+        $config = new DialConfig(['b_number' => $number]);
         return $this->call($config);
     }
 
     /**
-     * Gets the status of a click to dial call.
+     * Gets the status of a dial call.
      * Cached.
      *
      * @return mixed
@@ -94,7 +94,7 @@ class ClickToDial
      *
      * @return bool true if successful.
      * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \VoIPGRID\Exception\ClickToDialException
+     * @throws \VoIPGRID\Exception\DialException
      */
     public function requestStatus()
     {
@@ -113,7 +113,7 @@ class ClickToDial
             return false;
         }
 
-        $this->status = new ClickToDialStatus(json_decode($result->getBody(), true));
+        $this->status = new DialStatus(json_decode($result->getBody(), true));
         return true;
     }
 }

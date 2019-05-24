@@ -8,7 +8,7 @@ namespace VoIPGRID;
  *
  * @package VoIPGRID
  */
-class ClickToDialStatus extends ClickToDialConfig
+class DialStatus extends DialConfig
 {
     /**
      * Possible values in the status object.

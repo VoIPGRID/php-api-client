@@ -2,7 +2,7 @@
 
 namespace VoIPGRID;
 
-use VoIPGRID\Exception\ClickToDialException;
+use VoIPGRID\Exception\DialException;
 
 /**
  * Class ClickToDialConfig
@@ -10,7 +10,7 @@ use VoIPGRID\Exception\ClickToDialException;
  *
  * @package VoIPGRID
  */
-class ClickToDialConfig
+class DialConfig
 {
     protected $config;
 
@@ -27,7 +27,7 @@ class ClickToDialConfig
      * ClickToDialConfig constructor.
      *
      * @param array $config
-     * @throws \VoIPGRID\Exception\ClickToDialException
+     * @throws \VoIPGRID\Exception\DialException
      */
     public function __construct(array $config) {
         $this->validate($config);
@@ -39,14 +39,14 @@ class ClickToDialConfig
      * Validates the values of a click to dial config.
      *
      * @param array $config
-     * @throws \VoIPGRID\Exception\ClickToDialException
+     * @throws \VoIPGRID\Exception\DialException
      */
     private function validate(array $config) {
         $configKeys = array_keys($config);
         $difference = array_diff($configKeys, $this::$configValues);
 
         if (!empty($difference)) {
-            throw new ClickToDialException('Config is not valid');
+            throw new DialException('Config is not valid');
         }
     }
 
