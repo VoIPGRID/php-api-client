@@ -5,11 +5,11 @@ namespace VoIPGRID\Exception;
 use \Exception;
 
 /**
- * Class DialException
+ * Class CallException
  *
  * @package VoIPGRID\Exception
  */
-class DialException extends Exception
+class CallException extends Exception
 {
 
 }

@@ -12,7 +12,7 @@ use GuzzleHttp\Exception\ClientException;
  * The Click to dial interface.
  * @package VoIPGRID
  */
-class Dial
+class Call
 {
     private $user;
     private $endPoint;
@@ -20,7 +20,7 @@ class Dial
     private $status;
 
     /**
-     * Dial constructor.
+     * Call constructor.
      * @param \VoIPGRID\User $user
      * @param \GuzzleHttp\ClientInterface|NULL $client
      */
@@ -37,13 +37,13 @@ class Dial
     }
 
     /**
-     * @param \VoIPGRID\DialConfig $config The config object
+     * @param \VoIPGRID\CallConfig $config The config object
      * @return bool
      *
      * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \VoIPGRID\Exception\DialException
+     * @throws \VoIPGRID\Exception\CallException
      */
-    public function call(DialConfig $config): bool
+    public function call(CallConfig $config): bool
     {
         $platformURL = getenv('PLATFORM_URL');
 
@@ -61,7 +61,7 @@ class Dial
             return false;
         }
 
-        $this->status = new DialStatus(json_decode($result->getBody(), true));
+        $this->status = new CallStatus(json_decode($result->getBody(), true));
         print_r($this->status);
         return true;
     }
@@ -70,11 +70,11 @@ class Dial
      * @param string $number The number to call
      * @return bool
      * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \VoIPGRID\Exception\DialException
+     * @throws \VoIPGRID\Exception\CallException
      */
     public function callNumber(string $number)
     {
-        $config = new DialConfig(['b_number' => $number]);
+        $config = new CallConfig(['b_number' => $number]);
         return $this->call($config);
     }
 
@@ -94,7 +94,7 @@ class Dial
      *
      * @return bool true if successful.
      * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \VoIPGRID\Exception\DialException
+     * @throws \VoIPGRID\Exception\CallException
      */
     public function requestStatus()
     {
@@ -113,7 +113,7 @@ class Dial
             return false;
         }
 
-        $this->status = new DialStatus(json_decode($result->getBody(), true));
+        $this->status = new CallStatus(json_decode($result->getBody(), true));
         return true;
     }
 }

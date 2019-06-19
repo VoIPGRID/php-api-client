@@ -7,10 +7,10 @@ use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
-use \VoIPGRID\Dial;
+use \VoIPGRID\Call;
 use VoIPGRID\User;
 
-class DialTest extends TestCase
+class CallTest extends TestCase
 {
     /**
      * Tests the simple call number.
@@ -41,7 +41,7 @@ class DialTest extends TestCase
         $client = new Client(['handler' => $handler]);
         $user = new User('jdoe@example.com', 'password123');
 
-        $ctd = new Dial($user, $client);
+        $ctd = new Call($user, $client);
         $result = $ctd->callNumber('01234567890');
         $this->assertSame(true, $result);
 

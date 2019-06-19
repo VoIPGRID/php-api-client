@@ -3,30 +3,30 @@
 namespace VoIPGRID\Tests;
 
 use PHPUnit\Framework\TestCase;
-use VoIPGRID\DialConfig;
-use VoIPGRID\Exception\DialException;
+use VoIPGRID\CallConfig;
+use VoIPGRID\Exception\CallException;
 
 /**
  * Class ClickToDialConfigTest
  *
  * @package VoIPGRID\Tests
  */
-class DialConfigTest extends TestCase
+class CallConfigTest extends TestCase
 {
     /**
      * Tests the complex call function.
      *
-     * @throws \VoIPGRID\Exception\DialException
+     * @throws \VoIPGRID\Exception\CallException
      */
     public function testConfig()
     {
-        $config = new DialConfig([
+        $config = new CallConfig([
             'b_number' => '01234567890',
         ]);
 
         $this->assertSame(['b_number' => '01234567890'], $config->getConfig());
 
-        $config = new DialConfig([
+        $config = new CallConfig([
             'b_number' => '09876543210',
             'b_cli' => '01234567890',
             'auto_answer' => false,
@@ -40,8 +40,8 @@ class DialConfigTest extends TestCase
             $config->getConfig()
         );
 
-        $this->expectException(DialException::class);
-        $config = new DialConfig([
+        $this->expectException(CallException::class);
+        $config = new CallConfig([
             'b_number' => '01234567890',
             'foo' => 'bar',
         ]);
