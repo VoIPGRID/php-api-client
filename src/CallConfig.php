@@ -17,10 +17,15 @@ class CallConfig
     /**
      * @var array The possible values of a click to dial call.
      */
-    protected static $configValues = [
+    private static $configValues = [
         'auto_answer',
-        'b_cli',
-        'b_number',
+        'from',
+        'to',
+    ];
+
+    private static $endpointValues = [
+        'from' => 'a_cli',
+        'to' => 'b_number',
     ];
 
     /**
@@ -51,12 +56,32 @@ class CallConfig
     }
 
     /**
+     * Converts the human readable config values to the endpoint versions.
+     *
+     * @return array The endpoint config values
+     */
+    private function convertKeys() {
+        $returnVal = [];
+
+        foreach ($this->config as $key => $value) {
+            // Check if this key needs to be converted.
+            if (key_exists($key, self::$endpointValues)) {
+                $returnVal[self::$endpointValues[$key]] = $value;
+            } else {
+                $returnVal[$key] = $value;
+            }
+        }
+
+        return $returnVal;
+    }
+
+    /**
      * Retrieves the config.
      *
      * @return array
      */
     public function getConfig()
     {
-        return $this->config;
+        return $this->convertKeys();
     }
 }

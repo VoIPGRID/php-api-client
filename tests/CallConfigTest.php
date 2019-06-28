@@ -21,20 +21,18 @@ class CallConfigTest extends TestCase
     public function testConfig()
     {
         $config = new CallConfig([
-            'b_number' => '01234567890',
+            'to' => '01234567890',
         ]);
 
         $this->assertSame(['b_number' => '01234567890'], $config->getConfig());
 
         $config = new CallConfig([
-            'b_number' => '09876543210',
-            'b_cli' => '01234567890',
+            'to' => '09876543210',
             'auto_answer' => false,
         ]);
         $this->assertSame(
             [
                 'b_number' => '09876543210',
-                'b_cli' => '01234567890',
                 'auto_answer' => false,
             ],
             $config->getConfig()
@@ -42,7 +40,7 @@ class CallConfigTest extends TestCase
 
         $this->expectException(CallException::class);
         $config = new CallConfig([
-            'b_number' => '01234567890',
+            'to' => '01234567890',
             'foo' => 'bar',
         ]);
     }

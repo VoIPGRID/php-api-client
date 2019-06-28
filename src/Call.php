@@ -62,7 +62,7 @@ class Call
         }
 
         $this->status = new CallStatus(json_decode($result->getBody(), true));
-        print_r($this->status);
+
         return true;
     }
 
@@ -74,7 +74,7 @@ class Call
      */
     public function callNumber(string $number)
     {
-        $config = new CallConfig(['b_number' => $number]);
+        $config = new CallConfig(['to' => $number]);
         return $this->call($config);
     }
 
