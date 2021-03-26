@@ -1,12 +1,14 @@
 {
     "name": "voipgrid/client",
     "description": "A library to consume the VoIPGRID APIs.",
+    "keywords": ["VoIP", "Telephony", "API client"],
     "type": "library",
     "license": "MIT",
     "authors": [
         {
             "name": "Devhouse Spindle",
-            "email": "opensource@wearespindle.com"
+            "email": "opensource@wearespindle.com",
+            "homepage": "https://wearespindle.com/"
         }
     ],
     "require": {
